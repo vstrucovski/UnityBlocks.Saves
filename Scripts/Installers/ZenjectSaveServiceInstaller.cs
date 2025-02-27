@@ -1,4 +1,5 @@
 ﻿#if ZENJECT
+using UnityEngine;
 using Zenject;
 namespace UnityBlocks.SaveSystem.Modules.Installers
 {
