@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityBlocks.SaveSystem.Modules.Data
+namespace UnityBlocks.SaveSystem.Data
 {
     [Serializable]
     public class SavableData<T> : ISavable where T : new()

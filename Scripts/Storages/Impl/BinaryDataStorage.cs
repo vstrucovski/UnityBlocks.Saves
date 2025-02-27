@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using UnityBlocks.SaveSystem.Modules.Data;
+using UnityBlocks.SaveSystem.Data;
 using UnityEngine;
 
-namespace UnityBlocks.SaveSystem.Modules.Storages
+namespace UnityBlocks.SaveSystem.Storages.Impl
 {
     public class BinaryDataStorage : IDataStorage
     {
@@ -12,7 +12,7 @@ namespace UnityBlocks.SaveSystem.Modules.Storages
 
         public BinaryDataStorage()
         {
-            savePath = Application.persistentDataPath + "/saves/";
+            savePath = Application.persistentDataPath + "/Saves/";
             if (!Directory.Exists(savePath))
             {
                 Directory.CreateDirectory(savePath);
@@ -21,7 +21,7 @@ namespace UnityBlocks.SaveSystem.Modules.Storages
 
         private string GetFilePath<T>() where T : ISavable
         {
-            return Path.Combine(savePath, typeof(T).ToString() + ".bin");
+            return Path.Combine(savePath, typeof(T).Name + ".bin");
         }
 
         public T Load<T>() where T : ISavable, new()
@@ -52,7 +52,7 @@ namespace UnityBlocks.SaveSystem.Modules.Storages
             string filePath = GetFilePath<T>();
             try
             {
-                var json = JsonUtility.ToJson(saveData);
+                var json = JsonUtility.ToJson(saveData, true);
                 byte[] fileData = Encoding.UTF8.GetBytes(json);
                 File.WriteAllBytes(filePath, fileData);
                 Debug.Log($"Saved binary JSON for {typeof(T)}: {json}");

@@ -1,4 +1,4 @@
-﻿namespace UnityBlocks.SaveSystem.Modules.Data
+﻿namespace UnityBlocks.SaveSystem.Data
 {
     public interface ISavable
     {

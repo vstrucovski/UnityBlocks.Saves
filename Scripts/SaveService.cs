@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using UnityBlocks.SaveSystem.Modules.Data;
-using UnityBlocks.SaveSystem.Modules.Storages;
+using UnityBlocks.SaveSystem.Data;
+using UnityBlocks.SaveSystem.Storages;
 
-namespace UnityBlocks.SaveSystem.Modules
+namespace UnityBlocks.SaveSystem
 {
     public class SaveService : ISaveService
     {
         private readonly IDataStorage _dataStorage;
         private readonly ConcurrentDictionary<Type, object> _saveDataMap = new();
+        private SaveServiceConfig _config;
 
-        public SaveService(IDataStorage dataStorage)
+        public SaveService(IDataStorage dataStorage, SaveServiceConfig config)
         {
+            if (config == null) config = default;
             _dataStorage = dataStorage;
+            _config = config;
         }
 
         public void PrepareData<T>(T defaultValue = default) where T : ISavable, new()

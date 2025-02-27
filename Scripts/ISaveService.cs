@@ -1,6 +1,6 @@
-﻿using UnityBlocks.SaveSystem.Modules.Data;
+﻿using UnityBlocks.SaveSystem.Data;
 
-namespace UnityBlocks.SaveSystem.Modules
+namespace UnityBlocks.SaveSystem
 {
     public interface ISaveService
     {

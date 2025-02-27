@@ -1,7 +1,7 @@
-﻿using UnityBlocks.SaveSystem.Modules.Storages;
+﻿using UnityBlocks.SaveSystem.Storages.Impl;
 using UnityEngine;
 
-namespace UnityBlocks.SaveSystem.Modules.Example
+namespace UnityBlocks.SaveSystem.Example
 {
     public class ExampleData : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace UnityBlocks.SaveSystem.Modules.Example
 
         private void Start()
         {
-            saveService = new SaveService(new PlayerPrefsDataStorage());
+            saveService = new SaveService(new PlayerPrefsDataStorage(), default);
         }
 
         public void Load()
