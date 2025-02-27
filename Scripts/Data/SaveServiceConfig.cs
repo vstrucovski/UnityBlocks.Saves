@@ -2,7 +2,7 @@
 
 namespace UnityBlocks.SaveSystem.Data
 {
-    [CreateAssetMenu(menuName = Constants.CONFIG_MENU_PATH + "Save System")]
+    [CreateAssetMenu(menuName = Constants.CONFIG_MENU_PATH + "/Save System Config")]
     public class SaveServiceConfig : ScriptableObject
     {
         [field: SerializeField] public bool logRead { get; private set; } = true;
