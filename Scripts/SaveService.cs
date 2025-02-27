@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using UnityBlocks.SaveSystem.Modules.Data;
-using UnityBlocks.SaveSystem.Modules.Starages;
+using UnityBlocks.SaveSystem.Modules.Storages;
 
 namespace UnityBlocks.SaveSystem.Modules
 {
-    public class SaveService
+    public class SaveService : ISaveService
     {
         private readonly IDataStorage _dataStorage;
         private readonly ConcurrentDictionary<Type, object> _saveDataMap = new();

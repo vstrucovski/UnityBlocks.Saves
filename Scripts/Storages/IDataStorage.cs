@@ -1,6 +1,6 @@
 ﻿using UnityBlocks.SaveSystem.Modules.Data;
 
-namespace UnityBlocks.SaveSystem.Modules.Starages
+namespace UnityBlocks.SaveSystem.Modules.Storages
 {
     public interface IDataStorage
     {

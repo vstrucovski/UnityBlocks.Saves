@@ -1,7 +1,7 @@
 ﻿using UnityBlocks.SaveSystem.Modules.Data;
 using UnityEngine;
 
-namespace UnityBlocks.SaveSystem.Modules.Starages
+namespace UnityBlocks.SaveSystem.Modules.Storages
 {
     public class PlayerPrefsDataStorage : IDataStorage
     {

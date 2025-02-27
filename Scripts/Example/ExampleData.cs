@@ -1,4 +1,4 @@
-﻿using UnityBlocks.SaveSystem.Modules.Starages;
+﻿using UnityBlocks.SaveSystem.Modules.Storages;
 using UnityEngine;
 
 namespace UnityBlocks.SaveSystem.Modules.Example
