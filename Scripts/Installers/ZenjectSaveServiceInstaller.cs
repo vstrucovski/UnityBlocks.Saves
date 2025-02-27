@@ -2,7 +2,7 @@
 using Zenject;
 namespace UnityBlocks.SaveSystem.Modules.Installers
 {
-    public class ZenjectSaveServiceInstaller :MonoInstaller<PauseServiceInstaller>
+    public class ZenjectSaveServiceInstaller :MonoInstaller<ZenjectSaveServiceInstaller>
     {
         [SerializeField] private SaveServiceConfig config;
         public override void InstallBindings()
