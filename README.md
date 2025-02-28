@@ -26,14 +26,14 @@ Prepare your data
 ```
 ---
 ## 2. Usages
-Method **GetData()** uses dictionary under the hood, so it's almost free to get without additional caching. <br>
+Method **GetData()** uses dictionary under the hood, so it's almost free to get data, without additional caching. <br>
 Before accessing data, it could be warmed using method **PrepareData<T>()**
 ```csharp
 //manual creating 
-saveService = new SaveService(new PlayerPrefsDataStorage(), default);
+var saveService = new SaveService(new PlayerPrefsDataStorage(), default);
  
-// 💾 Loading Data. Before accessing data, it could be warmed using PrepareData<T>()
-saveService.PrepareData<CustomSavable>() //optional: uses once during loading
+// 💾 Loading Data
+saveService.PrepareData<CustomSavable>() //optional: use once during loading
 var myCustomData = saveService.GetData<CustomSavable>(); 
  
 // 💾 Saving Data
