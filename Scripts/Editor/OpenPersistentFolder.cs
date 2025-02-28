@@ -10,7 +10,7 @@ namespace UnityBlocks.SaveSystem.Editor
         [MenuItem(Constants.CONFIG_MENU_PATH + "Saves/Open saves folder")]
         private static void OpenPersistentDataFolder()
         {
-            var folderPath = Application.persistentDataPath;
+            var folderPath = Application.persistentDataPath + "/Saves/";
             OpenPersistentDataFolder(folderPath);
         }
 

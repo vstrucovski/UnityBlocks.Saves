@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace UnityBlocks.SaveSystem.Storages.Impl
 {
-    public class BinaryDataStorage : IDataStorage
+    public class BinaryJsonDataStorage : IDataStorage
     {
         private readonly string savePath;
         private SaveServiceConfig _config;
 
-        public BinaryDataStorage(SaveServiceConfig config)
+        public BinaryJsonDataStorage(SaveServiceConfig config)
         {
             _config = config;
             savePath = Application.persistentDataPath + "/Saves/";
@@ -23,7 +23,7 @@ namespace UnityBlocks.SaveSystem.Storages.Impl
 
         private string GetFilePath<T>() where T : ISavable
         {
-            return Path.Combine(savePath, typeof(T).Name + ".bin");
+            return Path.Combine(savePath, typeof(T).Name + ".json");
         }
 
         public T Load<T>() where T : ISavable, new()
@@ -71,11 +71,11 @@ namespace UnityBlocks.SaveSystem.Storages.Impl
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
-                Debug.Log($"Deleted binary save for {typeof(T)}.");
+                if (_config.logDelete) Debug.Log($"Deleted binary save for {typeof(T)}.");
             }
             else
             {
-                Debug.LogWarning($"Attempted to delete non-existent save for {typeof(T)}.");
+                if (_config.logDelete) Debug.LogWarning($"Attempted to delete non-existent save for {typeof(T)}.");
             }
         }
     }
