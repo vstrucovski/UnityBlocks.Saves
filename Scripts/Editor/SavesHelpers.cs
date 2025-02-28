@@ -66,7 +66,7 @@ namespace UnityBlocks.SaveSystem.Editor
 
             try
             {
-                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var timestamp = DateTime.Now.ToString("HH-mm-ss_dd-MM-yyyy");
                 var backupFolderPath = Path.Combine(BackupRootPath, $"SaveBackup_{timestamp}");
 
                 Directory.CreateDirectory(backupFolderPath);
