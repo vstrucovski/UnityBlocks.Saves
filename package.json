@@ -1,7 +1,7 @@
 {
   "name": "unityblocks.saves",
   "displayName": "UnityBlocks.Saves",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "unity": "2022.2",
   "description": "dev module",
   "dependencies": {
