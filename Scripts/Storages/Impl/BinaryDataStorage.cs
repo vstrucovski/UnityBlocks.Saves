@@ -9,9 +9,11 @@ namespace UnityBlocks.SaveSystem.Storages.Impl
     public class BinaryDataStorage : IDataStorage
     {
         private readonly string savePath;
+        private SaveServiceConfig _config;
 
-        public BinaryDataStorage()
+        public BinaryDataStorage(SaveServiceConfig config)
         {
+            _config = config;
             savePath = Application.persistentDataPath + "/Saves/";
             if (!Directory.Exists(savePath))
             {
@@ -29,15 +31,15 @@ namespace UnityBlocks.SaveSystem.Storages.Impl
             var filePath = GetFilePath<T>();
             if (!File.Exists(filePath))
             {
-                Debug.Log($"No save file found for {typeof(T)}, returning default.");
+                if (_config.logRead) Debug.Log($"No save file found for {typeof(T)}, returning default.");
                 return default;
             }
 
             try
             {
-                byte[] fileData = File.ReadAllBytes(filePath);
-                string json = Encoding.UTF8.GetString(fileData);
-                Debug.Log($"Loaded binary JSON for {typeof(T)}: {json}");
+                var fileData = File.ReadAllBytes(filePath);
+                var json = Encoding.UTF8.GetString(fileData);
+                if (_config.logRead) Debug.Log($"Loaded binary JSON for {typeof(T)}: {json}");
                 return JsonUtility.FromJson<T>(json);
             }
             catch (Exception e)
@@ -49,17 +51,17 @@ namespace UnityBlocks.SaveSystem.Storages.Impl
 
         public void Save<T>(T saveData) where T : ISavable
         {
-            string filePath = GetFilePath<T>();
+            var filePath = GetFilePath<T>();
             try
             {
                 var json = JsonUtility.ToJson(saveData, true);
-                byte[] fileData = Encoding.UTF8.GetBytes(json);
+                var fileData = Encoding.UTF8.GetBytes(json);
                 File.WriteAllBytes(filePath, fileData);
-                Debug.Log($"Saved binary JSON for {typeof(T)}: {json}");
+                if (_config.logRead) Debug.Log($"Saved binary JSON for {typeof(T)}: {json}");
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to save binary JSON for {typeof(T)}: {e.Message}");
+                Debug.LogError($"Failed to save binary JSON for {typeof(T)}: {e.Message} \nto path = {filePath}");
             }
         }
 

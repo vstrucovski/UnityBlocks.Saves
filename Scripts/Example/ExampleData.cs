@@ -1,15 +1,18 @@
-﻿using UnityBlocks.SaveSystem.Storages.Impl;
+﻿using UnityBlocks.SaveSystem.Data;
+using UnityBlocks.SaveSystem.Storages.Impl;
 using UnityEngine;
 
 namespace UnityBlocks.SaveSystem.Example
 {
     public class ExampleData : MonoBehaviour
     {
+        [SerializeField] private SaveServiceConfig config;
         private SaveService saveService;
 
         private void Start()
         {
-            saveService = new SaveService(new PlayerPrefsDataStorage(), default);
+            // saveService = new SaveService(new BinaryDataStorage(config), default);
+            saveService = new SaveService(new PlayerPrefsDataStorage(config), default);
         }
 
         public void Load()

@@ -1,47 +1,51 @@
-### 1. Installation
-Add to manifest file line
+## 🚀 Advantages
+ 
+- **🎯 Flexible** – Works with different storage solutions (e.g., `PlayerPrefs`, json).
+- **📦 DI-Friendly** – Ready to Zenject integration for better scalability.
+- **👀 Auto-Tracking** – Observable data wrappers let you react to changes instantly.
+- **⚡ Fast & Lightweight** – Optimized dictionary-based data retrieval.
+
+## 1. Installation
+To add this plugin to a project just put this line into the manifest file
 ```json
 "unityblocks.saves" : "https://github.com/vstrucovski/UnityBlocks.Saves.git"
 ```
 
-### 2. Init
+Prepare your data
 ```csharp
-
-public class MyComponent : MonoBehaviour
-{
-    private SaveService saveService;
-
-    private void Start()
+    //Pure data class to save
+    [Serializable]
+    public class GameProgress
     {
-        //manual creation should be replaced with DI for better scalability
-        saveService = new SaveService(new PlayerPrefsDataStorage(), default);
+        public float money;
+        public float experience;
     }
-}
-```
-### 3. Loading Data 💿
-Before accessing data, make sure it is could be warmed using PrepareData<T>()
-```csharp
-public void RetrieveSomeData()
-{
-    saveService.PrepareData<MyCustomData>() //optional: uses during loading
-    var myCustomData = saveService.GetData<MyCustomData>();
-}
-```
 
-
-### 4. Saving Data 💾
-```csharp
-public void SaveChanges()
-{
-    var myCustomData = ...
-    myCustomData.NotifyChanges(); // Optional: Use this if your data model requires change tracking
-    saveService.Save(myCustomData);
-}
+    //Wrapper for pure class with Observable inside
+    public class CustomSavable : SavableData<GameProgress>{}
 ```
-### 5. Using as service with DI 🚀
+---
+## 2. Usages
+Method **GetData()** uses dictionary under the hood, so it's almost free to get without additional caching. <br>
+Before accessing data, it could be warmed using method **PrepareData<T>()**
+```csharp
+//manual creating 
+saveService = new SaveService(new PlayerPrefsDataStorage(), default);
+ 
+//💾 **Loading Data**. Before accessing data, it could be warmed using PrepareData<T>()
+saveService.PrepareData<CustomSavable>() //optional: uses once during loading
+var myCustomData = saveService.GetData<CustomSavable>(); 
+ 
+//💾 **Saving Data** 
+saveService.Save(myCustomData);
+myCustomData.NotifyChanges(); // Optional: Use this if your data model requires change tracking
+```
+---
+## 4. Using as service with DI
 - Create a class for the service installer (ZenjectSaveServiceInstaller.cs) and add it to the project or scene scope.
-- Create config via project's menu "Create/Unity Blocks/Saves/Config" and assign it to installer
+- Create config via project's menu **Create > Unity Blocks > Saves > Config** and assign it to installer
 ```csharp
+using UnityBlocks.SaveSystem;
 using UnityBlocks.SaveSystem.Data;
 using UnityBlocks.SaveSystem.Storages;
 using UnityBlocks.SaveSystem.Storages.Impl;
@@ -53,6 +57,7 @@ namespace MyGame.Installers
     public class ZenjectSaveServiceInstaller :MonoInstaller
     {
         [SerializeField] private SaveServiceConfig config;
+        
         public override void InstallBindings()
         {
             if(config != null)
@@ -63,3 +68,8 @@ namespace MyGame.Installers
     }
 }
 ```
+---
+# TODO
+- encryption
+- more storages
+- mark data as dirty without real writing to file every time
