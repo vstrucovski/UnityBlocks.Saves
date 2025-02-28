@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UnityBlocks.SaveSystem.Editor
 {
-    public class SavesHelpers
+    public class MenuHelpers
     {
         private static readonly string SavesFolderPath = Application.persistentDataPath + "/Saves/";
         private static readonly string BackupRootPath = Application.persistentDataPath + "/";
@@ -66,7 +66,7 @@ namespace UnityBlocks.SaveSystem.Editor
 
             try
             {
-                var timestamp = DateTime.Now.ToString("HH-mm-ss_dd-MM-yyyy");
+                var timestamp = DateTime.Now.ToString("HH:mm:ss_ddMMyyyy");
                 var backupFolderPath = Path.Combine(BackupRootPath, $"SaveBackup_{timestamp}");
 
                 Directory.CreateDirectory(backupFolderPath);

@@ -41,7 +41,7 @@ saveService.Save(myCustomData);
 myCustomData.NotifyChanges(); // Optional: Use this if your data model requires change tracking
 ```
 ---
-## 4. Using as service with DI
+## 3. Using as service with DI
 - Create a class for the service installer (ZenjectSaveServiceInstaller.cs) and add it to the project or scene scope.
 - Create config via project's menu **Create > Unity Blocks > Saves > Config** and assign it to installer
 ```csharp
@@ -60,8 +60,8 @@ namespace MyGame.Installers
         
         public override void InstallBindings()
         {
-            if(config != null)
-                Container.BindInstance(config);
+            
+            Container.BindInstance(config);
             Container.Bind<IDataStorage>().To<PlayerPrefsDataStorage>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
         }
