@@ -32,11 +32,11 @@ Before accessing data, it could be warmed using method **PrepareData<T>()**
 //manual creating 
 saveService = new SaveService(new PlayerPrefsDataStorage(), default);
  
-//💾 **Loading Data**. Before accessing data, it could be warmed using PrepareData<T>()
+// 💾 Loading Data. Before accessing data, it could be warmed using PrepareData<T>()
 saveService.PrepareData<CustomSavable>() //optional: uses once during loading
 var myCustomData = saveService.GetData<CustomSavable>(); 
  
-//💾 **Saving Data** 
+// 💾 Saving Data
 saveService.Save(myCustomData);
 myCustomData.NotifyChanges(); // Optional: Use this if your data model requires change tracking
 ```

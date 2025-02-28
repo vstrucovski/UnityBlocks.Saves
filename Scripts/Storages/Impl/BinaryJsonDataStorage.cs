@@ -57,7 +57,7 @@ namespace UnityBlocks.SaveSystem.Storages.Impl
                 var json = JsonUtility.ToJson(saveData, true);
                 var fileData = Encoding.UTF8.GetBytes(json);
                 File.WriteAllBytes(filePath, fileData);
-                if (_config.logRead) Debug.Log($"Saved binary JSON for {typeof(T)}: {json}");
+                if (_config.logWrite) Debug.Log($"Saved binary JSON for {typeof(T)}: {json}");
             }
             catch (Exception e)
             {
