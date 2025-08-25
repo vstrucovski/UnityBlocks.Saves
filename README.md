@@ -1,7 +1,7 @@
 ## 🚀 Advantages
  
 - **🎯 Flexible** – Works with different storage solutions (e.g., `PlayerPrefs`, json).
-- **📦 DI-Friendly** – Ready to Zenject integration for better scalability.
+- **📦 DI-Friendly** – Ready for DI integration for better scalability.
 - **👀 Auto-Tracking** – Observable data wrappers let you react to changes instantly.
 - **⚡ Fast & Lightweight** – Optimized dictionary-based data retrieval.
 
